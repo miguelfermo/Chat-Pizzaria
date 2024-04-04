@@ -37,10 +37,51 @@
             </div>
         </div>
         <div class="chat-input-fake">
-            <input type="text" placeholder="Digite sua mensagem...">
-            <button>ENVIAR</button>
+            <input id="mensagemInput" type="text" placeholder="Digite sua mensagem...">
+            <button id="enviarBtn">ENVIAR</button>
         </div>
     </div>
+
+    <script>
+        // Função para enviar a mensagem ao clicar no botão
+        function enviarMensagem(event) {
+            // preventDefault() para evitar que o formulário seja enviado para o servidor
+            event.preventDefault();
+            // Captura o valor digitado no campo de input
+            const mensagem = document.getElementById('mensagemInput').value;
+            
+            // Verifica se a mensagem não é nula
+            if (mensagem !== null) {
+                // Cria um novo elemento div para a mensagem do usuário
+                var divMensagemUsuario = document.createElement('div');
+                // Adiciona as classes de estilo para a mensagem do usuário
+                divMensagemUsuario.className = 'message';
+                divMensagemUsuario.id = 'mensagemUsuario';
+                var frase = '<span class="me">Você diz:</span><div class="my-message">'
+                var frase2 = ''
+                // Verifica se já existe algum elemento com id 'mensagemUsuario'
+                if (document.getElementById('mensagemUsuario')) {
+                    var frase = ''
+                    var frase2 = '<div class="my-message">'
+                }
+                // Adiciona o conteúdo da mensagem do usuário
+                divMensagemUsuario.innerHTML = frase + frase2 + mensagem + '</div>';
+                
+                // Adiciona a nova mensagem na div de mensagens do chat
+                document.querySelector('.chat-messages').appendChild(divMensagemUsuario);
+                
+                // Limpa o campo de input após enviar a mensagem
+                document.getElementById('mensagemInput').value = '';
+                
+                // Role a janela de mensagens para baixo para mostrar a nova mensagem
+                var chatMessages = document.querySelector('.chat-messages');
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+
+        // Ao clicar no botão de enviar, a função enviarMensagem será chamada
+        document.getElementById('enviarBtn').addEventListener('click', enviarMensagem);
+    </script>
 </body>
 </html>
 
