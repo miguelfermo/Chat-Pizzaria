@@ -78,6 +78,10 @@ body {
     margin-top: 5px;
 }
 
+.my-message + .my-message {
+    margin-top: 5px;
+}
+
 .my-message {
     align-self: flex-end;
     max-width: 70%;
